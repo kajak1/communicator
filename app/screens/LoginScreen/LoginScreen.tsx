@@ -1,25 +1,16 @@
 import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
-import { FlexContainer } from "@components/styled";
-import { LoginForm } from "./components/LoginForm";
 
-const OuterContainer = styled(FlexContainer)`
-  /* border: 1px solid green; */
+import { LoginForm } from "@components/LoginScreen/LoginForm";
+
+const OuterContainer = styled.View`
+  flex: 1;
+  background-color: #22223b;
 `;
 
-const CreateAccountContainer = styled(FlexContainer)`
-  /* position: absolute; */
-  align-items: center;
-  width: 100%;
-  bottom: 5%;
-`;
-
-const Greeting = styled.Text`
-  /* position: absolute; */
-  padding: 9% 0 0 7%;
-  font-size: 46px;
-  color: #9a8c98;
+const InnerContainer = styled.View`
+  flex: 1;
 `;
 
 const CircleBackground = styled.View`
@@ -32,26 +23,36 @@ const CircleBackground = styled.View`
   left: -50px;
 `;
 
+const Greeting = styled.Text`
+  /* position: absolute; */
+  padding: 9% 0 0 7%;
+  font-size: 46px;
+  color: #9a8c98;
+`;
+
+const CreateAccountContainer = styled.View`
+  /* position: absolute; */
+  align-items: center;
+  width: 100%;
+  bottom: 5%;
+`;
+
 interface Props {
   greeting: string;
 }
 
-const StyledFlexCotainer = styled(FlexContainer)`
-  background-color: #22223b;
-`;
-
 const LoginScreen = ({ greeting = "Hello" }: Props): JSX.Element => {
   return (
-    <StyledFlexCotainer flex={1}>
-      <OuterContainer flex={1}>
+    <OuterContainer>
+      <InnerContainer>
         <CircleBackground></CircleBackground>
         <Greeting>{greeting}</Greeting>
         <LoginForm />
         <CreateAccountContainer>
           <Text>Not having account yet? Create one here</Text>
         </CreateAccountContainer>
-      </OuterContainer>
-    </StyledFlexCotainer>
+      </InnerContainer>
+    </OuterContainer>
   );
 };
 

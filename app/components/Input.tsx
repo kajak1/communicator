@@ -1,44 +1,56 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, TextInput, TextInputProps } from "react-native";
+import { DefaultTheme, StyledComponent } from "styled-components";
 import styled from "styled-components/native";
-import { FlexContainer } from "./styled";
+
+import { useToggle } from "@hooks/useToggle";
+
+const InnerContainer = styled.View`
+  flex-direction: row;
+`;
+
+const InputContainer = styled.View`
+  flex: 1;
+`;
+
+// styled-components/native types for TextInput are out of date, so I created a new one based on today's TextInput
+type DesiredType = StyledComponent<
+  typeof TextInput,
+  DefaultTheme,
+  Record<string, unknown>,
+  never
+>;
 
 const StyledInput = styled.TextInput`
-  width: 100%;
-  height: 75px;
-  background-color: #4a4e69;
-  border-radius: 12px;
-`;
+  flex: 1;
+  background-color: #363852;
+  padding-left: 8%;
+` as DesiredType;
 
-const StyledView = styled(FlexContainer)`
-  /* border: 1px solid blue; */
-`;
-
-const InputContainer = styled(FlexContainer)`
-  width: 90%;
-`;
-
-const LabelContainer = styled(FlexContainer)`
+const LabelContainer = styled.View<{ isFocused: boolean }>`
   position: absolute;
-  top: -25%;
-  left: 2%;
-  transform: translateY(16px);
+  left: 8%;
+  ${({ isFocused }) => (isFocused ? `top: 0%` : `top: 50%`)};
+  transform: translateY(-9px);
+  align-self: center;
 `;
 
-interface Props {
-  labelText: string;
+interface Props extends TextInputProps {
+  label: string;
 }
 
-const Input = ({ labelText }: Props): JSX.Element => {
+const Input = ({ label, style, ...rest }: Props): JSX.Element => {
+  const [isFocused, toggleFocused] = useToggle(false);
+
   return (
-    <StyledView flex={1} justifyContent="center" alignItems="center">
-      <InputContainer alignItems="center">
-        <StyledInput />
-        <LabelContainer>
-          <Text>{labelText}</Text>
+    <InnerContainer style={style}>
+      <InputContainer>
+        <StyledInput onFocus={toggleFocused} onBlur={toggleFocused} {...rest} />
+        <LabelContainer isFocused={isFocused}>
+          <Text>{label}</Text>
         </LabelContainer>
       </InputContainer>
-    </StyledView>
+    </InnerContainer>
   );
 };
 

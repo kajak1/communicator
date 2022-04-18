@@ -9,6 +9,8 @@ module.exports = {
         alias: {
           "@components": "./app/components",
           "@screens": "./app/screens",
+          "@utils": "./app/utils",
+          "@hooks": "./app/hooks",
         },
       },
     ],

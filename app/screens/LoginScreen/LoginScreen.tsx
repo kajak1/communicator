@@ -2,7 +2,11 @@ import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 
-import { LoginForm } from "@components/LoginScreen/LoginForm";
+import { useNavigation } from "@react-navigation/native";
+
+import { RootStackScreenProps } from "@navigation/types";
+
+import { LoginForm } from "./LoginForm";
 
 const OuterContainer = styled.View`
   flex: 1;
@@ -24,32 +28,36 @@ const CircleBackground = styled.View`
 `;
 
 const Greeting = styled.Text`
-  /* position: absolute; */
+  position: absolute;
   padding: 9% 0 0 7%;
   font-size: 46px;
   color: #9a8c98;
 `;
 
-const CreateAccountContainer = styled.View`
-  /* position: absolute; */
+const CreateAccountContainer = styled.TouchableOpacity`
+  position: absolute;
   align-items: center;
   width: 100%;
   bottom: 5%;
 `;
 
-interface Props {
-  greeting: string;
-}
+const LoginScreen = (): JSX.Element => {
+  const navigator = useNavigation<RootStackScreenProps<"Login">>();
 
-const LoginScreen = ({ greeting = "Hello" }: Props): JSX.Element => {
+  const handleNavigation = () => {
+    navigator.navigate("CreateAccount");
+  };
+
   return (
     <OuterContainer>
       <InnerContainer>
-        <CircleBackground></CircleBackground>
-        <Greeting>{greeting}</Greeting>
+        <CircleBackground />
+        <Greeting>Hello! Login below</Greeting>
         <LoginForm />
-        <CreateAccountContainer>
-          <Text>Not having account yet? Create one here</Text>
+        <CreateAccountContainer
+          onPress={handleNavigation}
+          hitSlop={{ top: 75, bottom: 75 }}>
+          <Text>Not having account yet? Click on this text</Text>
         </CreateAccountContainer>
       </InnerContainer>
     </OuterContainer>

@@ -1,21 +1,20 @@
 import React from "react";
 import styled from "styled-components/native";
 
-import { useNavigation } from "@react-navigation/native";
-
-import { Button } from "@components/Button";
-import { Input } from "@components/Input";
+import { Button, Input } from "@components";
 
 const OuterContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid red; */
 `;
 
 const StyledForm = styled.View`
-  height: 37%;
+  min-height: 40%;
   width: 90%;
   justify-content: space-between;
+  /* border: 1px solid blue; */
 `;
 
 const StyledInput = styled(Input)`
@@ -24,29 +23,22 @@ const StyledInput = styled(Input)`
 
 const StyledButton = styled(Button)`
   height: 60px;
-  justify-content: center;
-  align-items: center;
   background-color: #726d81;
 `;
 
 // interface Props {}
 
-const LoginForm = (): JSX.Element => {
-  const navigator = useNavigation();
-
-  const handleNavigation = () => {
-    // navigator.navigate("CreateAccount");
-  };
-
+const CreateAccountForm = (): JSX.Element => {
   return (
     <OuterContainer>
       <StyledForm>
         <StyledInput label="username" />
         <StyledInput label="password" />
-        <StyledButton title="log in" />
+        <StyledInput label="email address" />
+        <StyledButton title="Create" />
       </StyledForm>
     </OuterContainer>
   );
 };
 
-export { LoginForm };
+export { CreateAccountForm };

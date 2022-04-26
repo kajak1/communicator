@@ -2,28 +2,15 @@ import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 
-import { FlexContainer } from "@components/styled";
+import { useNavigation } from "@react-navigation/native";
 
-const OuterContainer = styled(FlexContainer)`
-  /* border: 1px solid green; */
-`;
+import { RootStackScreenProps } from "@navigation/types";
 
-const StyledFlexCotainer = styled(FlexContainer)`
+import { CreateAccountForm } from "./CreateAccountForm";
+
+const OuterContainer = styled.View`
+  flex: 1;
   background-color: #22223b;
-`;
-
-const CreateAccountContainer = styled(FlexContainer)`
-  /* position: absolute; */
-  align-items: center;
-  width: 100%;
-  bottom: 5%;
-`;
-
-const Greeting = styled.Text`
-  /* position: absolute; */
-  padding: 9% 0 0 7%;
-  font-size: 46px;
-  color: #9a8c98;
 `;
 
 const CircleBackground = styled.View`
@@ -36,21 +23,38 @@ const CircleBackground = styled.View`
   left: -50px;
 `;
 
-interface Props {
-  greeting: string;
-}
+const Greeting = styled.Text`
+  position: absolute;
+  padding: 9% 0 0 7%;
+  font-size: 46px;
+  color: #9a8c98;
+`;
 
-const CreateAccountScreen = ({ greeting = "Hi" }: Props): JSX.Element => {
+const LoginContainer = styled.TouchableOpacity`
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  bottom: 5%;
+`;
+
+const CreateAccountScreen = (): JSX.Element => {
+  const navigation = useNavigation<RootStackScreenProps<"CreateAccount">>();
+
+  const handleNavigation = () => {
+    navigation.navigate("Login");
+  };
+
   return (
-    <StyledFlexCotainer flex={1}>
-      <OuterContainer flex={1}>
-        <CircleBackground></CircleBackground>
-        <Greeting>{greeting}</Greeting>
-        <CreateAccountContainer>
-          <Text>Already have an account? Login here</Text>
-        </CreateAccountContainer>
-      </OuterContainer>
-    </StyledFlexCotainer>
+    <OuterContainer>
+      <CircleBackground />
+      <Greeting>Hi! Create your account below</Greeting>
+      <CreateAccountForm />
+      <LoginContainer
+        onPress={handleNavigation}
+        hitSlop={{ top: 75, bottom: 75 }}>
+        <Text>Already have an account? Login here</Text>
+      </LoginContainer>
+    </OuterContainer>
   );
 };
 

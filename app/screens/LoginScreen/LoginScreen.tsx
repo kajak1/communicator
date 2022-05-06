@@ -10,7 +10,7 @@ import { LoginForm } from "./LoginForm";
 
 const OuterContainer = styled.View`
   flex: 1;
-  background-color: #22223b;
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const InnerContainer = styled.View`
@@ -56,7 +56,7 @@ const LoginScreen = (): JSX.Element => {
         <LoginForm />
         <CreateAccountContainer
           onPress={handleNavigation}
-          hitSlop={{ top: 75, bottom: 75 }}>
+          hitSlop={{ top: 25, bottom: 25 }}>
           <Text>Not having account yet? Click on this text</Text>
         </CreateAccountContainer>
       </InnerContainer>

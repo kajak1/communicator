@@ -23,14 +23,15 @@ type DesiredType = StyledComponent<
 
 const StyledInput = styled.TextInput`
   flex: 1;
-  background-color: #363852;
+  background-color: ${({ theme }) => theme.input};
+  /* background-color: #363852; */
   padding-left: 8%;
 ` as DesiredType;
 
 const LabelContainer = styled.View<{ isFocused: boolean }>`
   position: absolute;
   left: 8%;
-  ${({ isFocused }) => (isFocused ? `top: 0%` : `top: 50%`)};
+  top: ${({ isFocused }) => (isFocused ? "0%" : "50%")};
   transform: translateY(-9px);
   align-self: center;
 `;

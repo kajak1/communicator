@@ -3,6 +3,7 @@ import { Switch } from "react-native";
 import styled from "styled-components/native";
 
 import { Button, Input } from "@components";
+
 import { useToggle } from "@hooks/useToggle";
 
 const OuterContainer = styled.View`
@@ -26,7 +27,7 @@ const StyledButton = styled(Button)`
   height: 60px;
   justify-content: center;
   align-items: center;
-  background-color: #726d81;
+  background-color: ${({ theme }) => theme.button};
 `;
 
 const KeepSignedContainer = styled.View`
